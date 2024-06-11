@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Math;  // Импортирование статических методов из System.Math
 
 namespace lr3
 {
@@ -7,6 +8,7 @@ namespace lr3
         static void Main(string[] args)
         {
             double a, b, Rad;
+            int variant;
 
             Console.WriteLine("1. Прямоугольник");
             Console.WriteLine("2. Круг");
@@ -15,28 +17,45 @@ namespace lr3
             //Console.WriteLine("5. Сектор");
 
             string temp = Console.ReadLine();
-            int variant = Convert.ToInt32(temp);    // преобразование в число
-
-            switch (variant)
+            try
             {
-                case 1:
-                    Console.Write("Сторона А = ");
-                    temp = Console.ReadLine();
-                    a = Convert.ToDouble(temp);
-                    Console.Write("Сторона B = ");
-                    temp = Console.ReadLine();
-                    b = Convert.ToDouble(temp);
-                    Console.WriteLine("Площадь прямоугольника = " + a * b);
-                    break;
+                variant = Convert.ToInt32(temp);    // преобразование в число
+            }
+            catch
+            {
+                variant = 0;
+                Console.WriteLine("Ошибка: введено не число. Пожалуйста, введите корректное число.");
+            }
 
-                case 2:
-                    Console.Write("Радиус R = ");
-                    temp = Console.ReadLine();
-                    Rad = Convert.ToDouble(temp);
-                    Console.WriteLine("Площадь круга = " + 4 * Atan(1.0) * Pow(Rad, 2.0));
-                    break;
+            try
+            {
+                switch (variant)
+                {
+                    case 1:
+                        Console.Write("Сторона А = ");
+                        temp = Console.ReadLine();
+                        a = Convert.ToDouble(temp);
+                        Console.Write("Сторона B = ");
+                        temp = Console.ReadLine();
+                        b = Convert.ToDouble(temp);
+                        Console.WriteLine("Площадь прямоугольника = " + a * b);
+                        break;
 
-                default: Console.WriteLine("Выбор неверен "); break;
+                    case 2:
+                        Console.Write("Радиус R = ");
+                        temp = Console.ReadLine();
+                        Rad = Convert.ToDouble(temp);
+                        Console.WriteLine("Площадь круга = " + 4 * Atan(1.0) * Pow(Rad, 2.0));
+                        break;
+
+                    default:
+                        Console.WriteLine("Выбор неверен");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при вводе числа: " + ex.Message);
             }
         }
     }
